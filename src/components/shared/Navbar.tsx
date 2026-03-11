@@ -143,22 +143,28 @@ export default function Navbar() {
                       Learn about our heritage and founding
                     </ListItem>
                     <ListItem
-                      href="/about/vision-mission"
+                      href="/about#vision-mission"
                       title="Vision & Mission"
                     >
                       Our purpose and core values
                     </ListItem>
-                    <ListItem href="/about/leadership" title="Leadership">
-                      Meet our board and administration
-                    </ListItem>
-                    <ListItem href="/about/accreditation" title="Accreditation">
-                      Our academic recognition
+                    <ListItem href="/about#mars-sttb" title="Mars STTB">
+                      Our mars
                     </ListItem>
                     <ListItem
-                      href="/about/facilities"
-                      title="Campus Facilities"
+                      href="/about#confession-of-faith"
+                      title="Confession of Faith"
                     >
-                      Explore our campus resources
+                      Our beliefs in pursuit of studies
+                    </ListItem>
+                    <ListItem
+                      href="/about#lecturer-council"
+                      title="Lecturer Council"
+                    >
+                      Meet our academic leaders
+                    </ListItem>
+                    <ListItem href="/about#foundation" title="Foundation">
+                      Find out more about our foundation leadership
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>
