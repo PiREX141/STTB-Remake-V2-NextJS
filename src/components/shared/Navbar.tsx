@@ -19,6 +19,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const ListItem = ({
   className,
@@ -108,11 +109,17 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-sttb-dark-blue">
-      <div className="container mx-auto max-w-screen-xl flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto max-w-screen flex h-16 items-center justify-between px-18">
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-white">STTB</span>
+            {/* <span className="text-xl font-bold text-white">STTB</span> */}
+            <Image
+              src="/logo-sttb.png"
+              alt="STTB Logo"
+              width={90}
+              height={90}
+            />
           </div>
         </Link>
 
