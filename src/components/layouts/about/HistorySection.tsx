@@ -7,7 +7,7 @@ const HistorySection = () => {
     <div className="flex flex-col">
       {/* Page Header */}
       <section className="bg-sttb-dark-blue text-white py-16">
-        <div className="container mx-auto max-w-screen-xl px-12">
+        <div className="container mx-auto max-w-screen px-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Our History</h1>
           <p className="text-xl text-gray-200">
             Over five decades of theological excellence
@@ -16,7 +16,7 @@ const HistorySection = () => {
       </section>
       {/* Content */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto max-w-screen-xl px-4">
+        <div className="container mx-auto max-w-screen px-4">
           <div className="max-w-4xl mx-auto">
             <div className="mb-12">
               <ImageWithFallback

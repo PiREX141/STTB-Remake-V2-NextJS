@@ -1,5 +1,8 @@
+import ConfessionOfFaithSection from "@/components/layouts/about/ConfessionOfFaithSection";
 import HistorySection from "@/components/layouts/about/HistorySection";
+import MarsSttbSection from "@/components/layouts/about/MarsSttbSection";
 import ScrollSpyAbout from "@/components/layouts/about/ScrollSpyAbout";
+import { Mars } from "lucide-react";
 
 export default function About() {
   return (
@@ -18,11 +21,11 @@ export default function About() {
         </section>
 
         <section id="mars-sttb" className="min-h-screen">
-          Mars STTB
+          <MarsSttbSection />
         </section>
 
         <section id="confession-of-faith" className="min-h-screen">
-          Confession of Faith
+          <ConfessionOfFaithSection />
         </section>
 
         <section id="lecturer-council" className="min-h-screen">
