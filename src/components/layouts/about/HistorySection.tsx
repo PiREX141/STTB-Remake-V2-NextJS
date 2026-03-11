@@ -15,7 +15,7 @@ const HistorySection = () => {
         </div>
       </section>
       {/* Content */}
-      <section className="py-16 md:py-24 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto max-w-screen-xl px-4">
           <div className="max-w-4xl mx-auto">
             <div className="mb-12">
@@ -157,7 +157,7 @@ const HistorySection = () => {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto grid grid-cols-3 gap-8 p-8 px-12">
+      <section className="max-w-7xl mx-auto grid grid-cols-3 gap-8 pt-8 pb-16 px-12">
         {/* LEFT SIDE - 2x2 GRID */}
         <div className="col-span-2 grid grid-cols-2 border">
           {/* API */}
@@ -237,17 +237,41 @@ const HistorySection = () => {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-white px-12">
-        <div className="flex flex-col place-items-start">
-          <Image
-            src="/founder-caleb-tong.png"
-            alt="Caleb Tong"
-            width={200}
-            height={200}
-          />
-          <h1 className="text-2xl font-bold mt-4 text-center">
-            Rev. DR. Caleb Tong (Alm.)
-          </h1>
+      <section className="py-5 bg-white px-12">
+        <div className="flex flex-row justify-evenly">
+          <div className="flex flex-col place-items-start items-center w-fit shadow-2xl p-5 rounded-lg">
+            <Image
+              src="/founder-caleb-tong.png"
+              alt="Caleb Tong"
+              width={300}
+              height={300}
+            />
+            <h1 className="text-lg mt-4 text-center text-sttb-dark-blue">
+              Rev. DR. Caleb Tong (Alm.)
+            </h1>
+          </div>
+          <div className="flex flex-col place-items-start items-center w-fit shadow-2xl p-5 rounded-lg">
+            <Image
+              src="/founder-joseph-tong.png"
+              alt="Joseph Tong"
+              width={300}
+              height={300}
+            />
+            <h1 className="text-lg mt-4 text-center">
+              Rev. DR. Joseph Tong Ph. D.
+            </h1>
+          </div>
+          <div className="flex flex-col place-items-start items-center w-fit shadow-2xl p-5 rounded-lg">
+            <Image
+              src="/founder-dorothy-i-marx.png"
+              alt="Dorothy I. Marx"
+              width={300}
+              height={300}
+            />
+            <h1 className="text-lg mt-4 text-center">
+              Rev. Dorothy I. Marx (Alm.)
+            </h1>
+          </div>
         </div>
       </section>
     </div>
