@@ -13,7 +13,7 @@ const RequirementList = ({
 }: RequirementListProps) => {
   return (
     <div className={className}>
-      <h2 className="text-3xl font-bold text-sttb-dark-blue mb-6">{title}</h2>
+      {title && <h2 className="text-3xl font-bold text-sttb-dark-blue mb-6">{title}</h2>}
 
       <ul className="space-y-3">
         {requirements.map((req, index) => (

@@ -1,20 +1,49 @@
 "use client";
 
-export default function AdmissionsProcess() {
+export default function AdmissionsProcedure() {
   const steps = [
-    { step: 1, title: "Submit Online Application", description: "Complete the application form with personal and academic information." },
-    { step: 2, title: "Provide Supporting Documents", description: "Submit transcripts, recommendations, and required essays." },
-    { step: 3, title: "Application Review", description: "Admissions committee reviews your complete application package." },
-    { step: 4, title: "Interview", description: "Participate in an interview with faculty or admissions staff." },
-    { step: 5, title: "Admission Decision", description: "Receive notification of admission decision within 4 weeks." },
-    { step: 6, title: "Enrollment Confirmation", description: "Accept admission offer and submit enrollment deposit." },
+    {
+      step: 1,
+      title: "Submit Online Application",
+      description:
+        "Complete the application form with personal and academic information.",
+    },
+    {
+      step: 2,
+      title: "Provide Supporting Documents",
+      description: "Submit transcripts, recommendations, and required essays.",
+    },
+    {
+      step: 3,
+      title: "Application Review",
+      description:
+        "Admissions committee reviews your complete application package.",
+    },
+    {
+      step: 4,
+      title: "Interview",
+      description:
+        "Participate in an interview with faculty or admissions staff.",
+    },
+    {
+      step: 5,
+      title: "Admission Decision",
+      description: "Receive notification of admission decision within 4 weeks.",
+    },
+    {
+      step: 6,
+      title: "Enrollment Confirmation",
+      description: "Accept admission offer and submit enrollment deposit.",
+    },
   ];
 
   return (
     <div className="flex flex-col">
       <section className="bg-sttb-dark-blue text-white py-16">
         <div className="container mx-auto max-w-screen-xl px-4">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Application Process</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Application Process
+          </h1>
           <p className="text-xl text-gray-200">Your pathway to STTB</p>
         </div>
       </section>
@@ -35,7 +64,9 @@ export default function AdmissionsProcess() {
                     )}
                   </div>
                   <div className="pb-8">
-                    <h3 className="text-xl font-semibold text-sttb-dark-blue mb-2">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-sttb-dark-blue mb-2">
+                      {item.title}
+                    </h3>
                     <p className="text-gray-700">{item.description}</p>
                   </div>
                 </div>

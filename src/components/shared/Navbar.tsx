@@ -232,8 +232,8 @@ export default function Navbar() {
                       Registration schedule detail
                     </ListItem>
                     <ListItem
-                      href="/admissions/process"
-                      title="Admission Process"
+                      href="/admissions/procedure"
+                      title="Admission Procedure"
                     >
                       Steps to apply
                     </ListItem>
