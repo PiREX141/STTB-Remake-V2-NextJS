@@ -74,7 +74,7 @@ export default function Procedure() {
 
       {/* Procedure Steps */}
       <section className="py-16 bg-white">
-        <div className="container mx-auto max-w-screen px-12">
+        <div className="container mx-auto max-w-screen px-24">
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-4">
             {procedureSteps.map((step, index) => (
               <div
