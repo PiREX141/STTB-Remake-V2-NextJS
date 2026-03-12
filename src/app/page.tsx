@@ -167,14 +167,14 @@ export default function Home() {
 
       {/* Latest News */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-screen-xl px-4">
+        <div className="container mx-auto max-w-screen px-4">
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sttb-dark-blue">
                 Latest News
               </h2>
               <p className="text-lg text-gray-600">
-                Stay updated with what&apos;s happening at STTB
+                Stay updated with what's happening at STTB
               </p>
             </div>
             <Button
@@ -254,7 +254,7 @@ export default function Home() {
 
       {/* Upcoming Events */}
       <section className="py-16 md:py-24 bg-sttb-secondary-blue/10">
-        <div className="container mx-auto max-w-screen-xl px-4">
+        <div className="container mx-auto max-w-screen px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sttb-dark-blue">
               Upcoming Events
@@ -300,7 +300,7 @@ export default function Home() {
                 <Card className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex gap-4">
-                      <div className="flex-shrink-0 w-16 h-16 bg-sttb-accent-red rounded-lg flex flex-col items-center justify-center text-white">
+                      <div className="shrink-0 w-16 h-16 bg-sttb-accent-red rounded-lg flex flex-col items-center justify-center text-white">
                         <div className="text-xs font-semibold">
                           {event.date.split(" ")[0]}
                         </div>
@@ -334,7 +334,7 @@ export default function Home() {
 
       {/* Campus Highlights */}
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-screen-xl px-4">
+        <div className="container mx-auto max-w-screen px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sttb-dark-blue">
               Why Choose STTB?
@@ -389,8 +389,8 @@ export default function Home() {
       </section>
 
       {/* Call to Action */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-sttb-primary-blue to-sttb-secondary-blue text-white">
-        <div className="container mx-auto max-w-screen-xl px-4 text-center">
+      <section className="py-16 md:py-24 bg-linear-to-r from-sttb-primary-blue to-sttb-secondary-blue text-white">
+        <div className="container mx-auto max-w-screen px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Ready to Begin Your Journey?
           </h2>
