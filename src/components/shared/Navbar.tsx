@@ -215,10 +215,10 @@ export default function Navbar() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-white hover:text-sttb-secondary-blue hover:bg-transparent data-[state=open]:bg-transparent">
-                  Admissions & Finances
+                  Admissions
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4">
+                  <ul className="grid w-100 gap-3 p-4">
                     <ListItem
                       href="https://sis.sttb.ac.id/pmb"
                       title="Online Registration"
@@ -245,6 +245,35 @@ export default function Navbar() {
                     </ListItem>
                     <ListItem href="/admissions/faq" title="FAQ">
                       Frequently Asked Questions
+                    </ListItem>
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+
+          <NavigationMenu>
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="bg-transparent text-white hover:text-sttb-secondary-blue hover:bg-transparent data-[state=open]:bg-transparent">
+                  Finances
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4">
+                    <ListItem href="/finances/tuition-fee" title="Tuition Fee">
+                      University Tuition Fee information
+                    </ListItem>
+                    <ListItem
+                      href="/finances/scholarships"
+                      title="Scholarships"
+                    >
+                      Scholarships that students can take
+                    </ListItem>
+                    <ListItem
+                      href="/finances/support-sttb"
+                      title="Support STTB"
+                    >
+                      Support us here
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>
@@ -284,6 +313,9 @@ export default function Navbar() {
                     >
                       Housing and amenities
                     </ListItem>
+                    <ListItem href="/resources" title="Resources">
+                      Document downloads and library access
+                    </ListItem>
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
@@ -298,15 +330,6 @@ export default function Navbar() {
                   className="text-white hover:text-sttb-secondary-blue transition-colors px-3 py-2"
                 >
                   News & Events
-                </Link>
-              </NavigationMenuItem>
-
-              <NavigationMenuItem>
-                <Link
-                  href="/resources"
-                  className="text-white hover:text-sttb-secondary-blue transition-colors px-3 py-2"
-                >
-                  Resources
                 </Link>
               </NavigationMenuItem>
 
