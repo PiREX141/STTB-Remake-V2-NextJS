@@ -5,7 +5,6 @@ import LecturerCouncilSection from "@/components/layouts/about/LecturerCouncilSe
 import MarsSttbSection from "@/components/layouts/about/MarsSttbSection";
 import ScrollSpyAbout from "@/components/layouts/about/ScrollSpyAbout";
 import VisionMissionSection from "@/components/layouts/about/VisionMissionSection";
-import { Mars } from "lucide-react";
 
 export default function About() {
   return (

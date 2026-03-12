@@ -30,7 +30,7 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about/history" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link href="/about" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
                   About Us
                 </Link>
               </li>
@@ -40,7 +40,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/admissions/apply" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link href="https://sis.sttb.ac.id/pmb" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
                   Apply Now
                 </Link>
               </li>

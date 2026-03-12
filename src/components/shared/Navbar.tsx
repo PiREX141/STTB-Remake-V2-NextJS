@@ -215,7 +215,7 @@ export default function Navbar() {
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="bg-transparent text-white hover:text-sttb-secondary-blue hover:bg-transparent data-[state=open]:bg-transparent">
-                  Admissions
+                  Admissions & Finances
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
@@ -226,22 +226,25 @@ export default function Navbar() {
                       Register online here!
                     </ListItem>
                     <ListItem
+                      href="/admissions/schedule"
+                      title="Admission Schedule"
+                    >
+                      Registration schedule detail
+                    </ListItem>
+                    <ListItem
                       href="/admissions/process"
-                      title="Application Process"
+                      title="Admission Process"
                     >
                       Steps to apply
                     </ListItem>
-                    <ListItem href="/admissions/tuition" title="Tuition & Fees">
-                      Cost of attendance
-                    </ListItem>
                     <ListItem
-                      href="/admissions/scholarships"
-                      title="Scholarships"
+                      href="/admissions/requirements"
+                      title="Requirements Info"
                     >
-                      Financial aid opportunities
+                      Information about students requirements to apply
                     </ListItem>
-                    <ListItem href="/admissions/apply" title="Apply Now">
-                      Start your application
+                    <ListItem href="/admissions/faq" title="FAQ">
+                      Frequently Asked Questions
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>
