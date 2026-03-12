@@ -146,7 +146,7 @@ export default function Navbar() {
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
-                    <ListItem href="/about#history" title="History">
+                    <ListItem href="/about" title="History">
                       Learn about our heritage and founding
                     </ListItem>
                     <ListItem
@@ -220,10 +220,10 @@ export default function Navbar() {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
                     <ListItem
-                      href="/admissions/requirements"
-                      title="Requirements"
+                      href="https://sis.sttb.ac.id/pmb"
+                      title="Online Registration"
                     >
-                      Admission criteria and prerequisites
+                      Register online here!
                     </ListItem>
                     <ListItem
                       href="/admissions/process"

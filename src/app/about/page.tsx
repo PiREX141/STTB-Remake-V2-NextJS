@@ -2,22 +2,23 @@ import ConfessionOfFaithSection from "@/components/layouts/about/ConfessionOfFai
 import HistorySection from "@/components/layouts/about/HistorySection";
 import MarsSttbSection from "@/components/layouts/about/MarsSttbSection";
 import ScrollSpyAbout from "@/components/layouts/about/ScrollSpyAbout";
+import VisionMissionSection from "@/components/layouts/about/VisionMissionSection";
 import { Mars } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="flex">
+    <div className="flex items-start">
       {/* Sidebar */}
       <ScrollSpyAbout />
 
       {/* Page Content */}
-      <main className="ml-60 flex flex-col w-full">
+      <main className="flex flex-col w-full">
         <section id="history" className="min-h-screen">
           <HistorySection />
         </section>
 
         <section id="vision-mission" className="min-h-screen">
-          Vision & Mission
+          <VisionMissionSection />
         </section>
 
         <section id="mars-sttb" className="min-h-screen">
@@ -32,7 +33,7 @@ export default function About() {
           Lecturer Council
         </section>
 
-        <section id="foundation" className="min-h-screen p">
+        <section id="foundation" className="min-h-screen">
           Foundation
         </section>
       </main>

@@ -54,7 +54,7 @@ const ScrollSpyAbout = () => {
   }, []);
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-60 border-r bg-white flex items-center">
+    <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 border-r bg-white flex items-center self-start">
       <nav className="relative px-6">
         {/* background line */}
         <div className="absolute left-2 top-0 h-full w-[2px] bg-gray-200" />

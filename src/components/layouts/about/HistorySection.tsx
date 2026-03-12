@@ -151,13 +151,13 @@ const HistorySection = () => {
         </div>
       </section>
 
-      <section className="bg-white text-sttb-dark-blue">
+      <section className="bg-gray-50 text-sttb-dark-blue pt-6">
         <div className="container mx-auto max-w-screen-xl px-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Symbols</h1>
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto grid grid-cols-3 gap-8 pt-8 pb-16 px-12">
+      <section className="mx-auto grid grid-cols-3 gap-8 pt-8 pb-16 px-12 bg-gray-50">
         {/* LEFT SIDE - 2x2 GRID */}
         <div className="col-span-2 grid grid-cols-2 border">
           {/* API */}
@@ -237,7 +237,7 @@ const HistorySection = () => {
         </div>
       </section>
 
-      <section className="py-5 bg-white px-12">
+      <section className="pt-5 pb-24 bg-white px-12">
         <div className="flex flex-row justify-evenly">
           <div className="flex flex-col place-items-start items-center w-fit shadow-2xl p-5 rounded-lg">
             <Image
