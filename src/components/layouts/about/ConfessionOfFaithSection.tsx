@@ -19,7 +19,7 @@ const ConfessionOfFaithSection = () => {
 
       <section className="py-16 bg-white">
         <div className="flex flex-row justify-between px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
               {
                 title: "1. Kami Percaya",
