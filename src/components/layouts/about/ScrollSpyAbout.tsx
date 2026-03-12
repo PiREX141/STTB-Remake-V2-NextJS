@@ -57,11 +57,11 @@ const ScrollSpyAbout = () => {
     <aside className="sticky top-16 h-[calc(100vh-4rem)] w-64 border-r bg-white flex items-center self-start">
       <nav className="relative px-6">
         {/* background line */}
-        <div className="absolute left-2 top-0 h-full w-[2px] bg-gray-200" />
+        <div className="absolute left-2 top-0 h-full w-0.5 bg-gray-200" />
 
         {/* progress line */}
         <div
-          className="absolute left-2 top-0 w-[2px] bg-blue-600 transition-all"
+          className="absolute left-2 top-0 w-0.5 bg-blue-600 transition-all"
           style={{ height: `${progress * 100}%` }}
         />
 
