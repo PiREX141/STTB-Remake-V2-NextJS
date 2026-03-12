@@ -152,7 +152,7 @@ const HistorySection = () => {
       </section>
 
       <section className="bg-gray-50 text-sttb-dark-blue pt-6">
-        <div className="container mx-auto max-w-screen-xl px-12">
+        <div className="container mx-auto max-w-screen px-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Symbols</h1>
         </div>
       </section>
