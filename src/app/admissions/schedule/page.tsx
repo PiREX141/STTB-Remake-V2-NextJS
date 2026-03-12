@@ -1,3 +1,32 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  ClipboardList,
+  NotebookText,
+  HelpCircle,
+  type LucideIcon,
+} from "lucide-react";
+
+const navButtons: { label: string; href: string; icon: LucideIcon }[] = [
+  {
+    label: "Procedure",
+    href: "/admissions/procedure",
+    icon: ClipboardList,
+  },
+  {
+    label: "FAQ",
+    href: "/admissions/faq",
+    icon: HelpCircle,
+  },
+  {
+    label: "Requirements",
+    href: "/admissions/requirements",
+    icon: NotebookText,
+  },
+];
+
 const gelombangSchedule = [
   {
     number: 1,
@@ -227,6 +256,29 @@ export default function Schedule() {
                 {/* Via */}
                 <p className="text-red-600 font-semibold">{item.via}</p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="container mx-auto max-w-screen px-4">
+          <div className="max-w-4xl mx-auto flex flex-row justify-center gap-8 flex-wrap">
+            {navButtons.map((btn) => (
+              <Link key={btn.label} href={btn.href}>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="flex flex-col items-center gap-2 p-6 rounded-xl bg-gray-50 shadow-md cursor-pointer w-48"
+                >
+                  <div className="w-24 h-24 rounded-lg bg-transparent flex items-center justify-center">
+                    <btn.icon className="w-12 h-12 text-sttb-dark-blue" />
+                  </div>
+                  <span className="text-lg font-semibold text-sttb-dark-blue">
+                    {btn.label}
+                  </span>
+                </motion.div>
+              </Link>
             ))}
           </div>
         </div>
