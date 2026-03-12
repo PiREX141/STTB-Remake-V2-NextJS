@@ -290,6 +290,12 @@ export default function Navbar() {
                 <NavigationMenuContent>
                   <ul className="grid w-[400px] gap-3 p-4">
                     <ListItem
+                      href="/student-life/facilities"
+                      title="Facilities"
+                    >
+                      Facilities provided by STTB
+                    </ListItem>
+                    <ListItem
                       href="/student-life/activities"
                       title="Campus Activities"
                     >
@@ -306,12 +312,6 @@ export default function Navbar() {
                       title="Spiritual Formation"
                     >
                       Chapel and spiritual life
-                    </ListItem>
-                    <ListItem
-                      href="/student-life/facilities"
-                      title="Facilities"
-                    >
-                      Housing and amenities
                     </ListItem>
                     <ListItem href="/resources" title="Resources">
                       Document downloads and library access
