@@ -1,5 +1,7 @@
 import ConfessionOfFaithSection from "@/components/layouts/about/ConfessionOfFaithSection";
+import FoundationSection from "@/components/layouts/about/FoundationSection";
 import HistorySection from "@/components/layouts/about/HistorySection";
+import LecturerCouncilSection from "@/components/layouts/about/LecturerCouncilSection";
 import MarsSttbSection from "@/components/layouts/about/MarsSttbSection";
 import ScrollSpyAbout from "@/components/layouts/about/ScrollSpyAbout";
 import VisionMissionSection from "@/components/layouts/about/VisionMissionSection";
@@ -30,11 +32,11 @@ export default function About() {
         </section>
 
         <section id="lecturer-council" className="min-h-screen">
-          Lecturer Council
+          <LecturerCouncilSection />
         </section>
 
         <section id="foundation" className="min-h-screen">
-          Foundation
+          <FoundationSection />
         </section>
       </main>
     </div>

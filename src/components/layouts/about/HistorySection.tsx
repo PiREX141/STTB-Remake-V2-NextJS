@@ -232,7 +232,7 @@ const HistorySection = () => {
       </section>
 
       <section className="bg-white text-sttb-dark-blue">
-        <div className="container mx-auto max-w-screen-xl px-12">
+        <div className="container mx-auto max-w-screen px-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Founder</h1>
         </div>
       </section>

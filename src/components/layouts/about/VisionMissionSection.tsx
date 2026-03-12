@@ -18,26 +18,6 @@ const VisionMissionSection = () => {
         </div>
       </section>
 
-      {/* Vision
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto max-w-screen px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <div className="w-20 h-20 bg-sttb-primary-blue rounded-full flex items-center justify-center mx-auto mb-6">
-              <Target className="h-10 w-10 text-white" />
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-sttb-dark-blue mb-6">
-              Our Vision
-            </h2>
-            <p className="text-xl text-gray-700 leading-relaxed">
-              To be a leading theological seminary in Indonesia that equips
-              Christian leaders with sound biblical knowledge, practical
-              ministry skills, and spiritual maturity to serve the church and
-              transform communities for the glory of God.
-            </p>
-          </div>
-        </div>
-      </section> */}
-
       {/* Vision */}
       <section className="py-16 bg-white">
         <div className="container mx-auto max-w-screen px-4">
