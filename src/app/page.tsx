@@ -404,7 +404,7 @@ export default function Home() {
               size="lg"
               className="bg-sttb-accent-red hover:bg-sttb-accent-red/90 text-white cursor-pointer"
             >
-              <Link href="/admissions/apply">Apply Now</Link>
+              <Link href="https://sis.sttb.ac.id/pmb">Apply Now</Link>
             </Button>
             <Button
               asChild
