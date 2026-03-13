@@ -336,7 +336,7 @@ export default function Navbar() {
             asChild
             className="bg-sttb-accent-red hover:bg-sttb-accent-red/90 text-white"
           >
-            <Link href="/admissions/apply">Apply Now</Link>
+            <Link href="https://sis.sttb.ac.id/pmb">Apply Now</Link>
           </Button>
         </nav>
 
