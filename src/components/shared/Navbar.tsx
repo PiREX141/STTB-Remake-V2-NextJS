@@ -295,25 +295,13 @@ export default function Navbar() {
                     >
                       Facilities provided by STTB
                     </ListItem>
-                    <ListItem
-                      href="/student-life/activities"
-                      title="Campus Activities"
-                    >
-                      Events and programs
+                    <ListItem href="/student-life/coachings" title="Coachings">
+                      Student coachings
                     </ListItem>
-                    <ListItem
-                      href="/student-life/organizations"
-                      title="Student Organizations"
-                    >
-                      Clubs and ministries
+                    <ListItem href="/student-life/senat" title="Senat">
+                      Students Today, Leaders Tomorrow!
                     </ListItem>
-                    <ListItem
-                      href="/student-life/spiritual"
-                      title="Spiritual Formation"
-                    >
-                      Chapel and spiritual life
-                    </ListItem>
-                    <ListItem href="/resources" title="Resources">
+                    <ListItem href="/resources" title="Resources & Library">
                       Document downloads and library access
                     </ListItem>
                   </ul>
