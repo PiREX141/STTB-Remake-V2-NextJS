@@ -301,8 +301,8 @@ export default function Navbar() {
                     <ListItem href="/student-life/senat" title="Senat">
                       Students Today, Leaders Tomorrow!
                     </ListItem>
-                    <ListItem href="/resources" title="Resources & Library">
-                      Document downloads and library access
+                    <ListItem href="/library" title="Library">
+                      Check out our library
                     </ListItem>
                   </ul>
                 </NavigationMenuContent>
