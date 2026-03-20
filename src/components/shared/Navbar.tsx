@@ -193,7 +193,7 @@ export default function Navbar() {
                     >
                       Undergraduate and graduate programs
                     </ListItem>
-                    <ListItem href="/academics/faculty" title="Faculty">
+                    {/* <ListItem href="/academics/faculty" title="Faculty">
                       Meet our teaching scholars
                     </ListItem>
                     <ListItem href="/academics/curriculum" title="Curriculum">
@@ -204,7 +204,7 @@ export default function Navbar() {
                       title="Academic Calendar"
                     >
                       Important dates and schedules
-                    </ListItem>
+                    </ListItem> */}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
