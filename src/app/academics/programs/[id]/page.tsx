@@ -138,6 +138,64 @@ export default function ProgramStudiId() {
     ? "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry. Students will develop critical thinking skills, theological literacy, and practical competencies needed for effective ministry in diverse contexts."
     : "An advanced graduate program preparing students for theological leadership and specialized Christian service through intensive biblical and theological study. This program equips graduates with advanced research skills, deeper theological understanding, and specialized expertise for academic and ministry leadership roles.";
 
+  const persyaratan = isS1
+    ? [
+        "Lulusan SMA/SMK/MA atau sederajat",
+        "Memiliki ijazah dan transkrip nilai yang sah",
+        "Mengisi formulir pendaftaran online",
+        "Menyerahkan pas foto terbaru ukuran 3x4 (2 lembar)",
+        "Fotokopi KTP dan Kartu Keluarga",
+        "Surat rekomendasi dari gereja/gembala",
+        "Lulus tes masuk (tertulis dan wawancara)",
+        "Bersedia menaati peraturan kampus",
+      ]
+    : [
+        "Lulusan program Sarjana (S1) Teologi atau bidang terkait",
+        "IPK minimal 3.00 dari program S1",
+        "Memiliki pengalaman pelayanan minimal 2 tahun",
+        "Mengisi formulir pendaftaran online",
+        "Menyerahkan ijazah dan transkrip S1 yang telah dilegalisir",
+        "Surat rekomendasi dari 2 dosen/gembala",
+        "Menulis proposal rencana studi",
+        "Lulus seleksi masuk (ujian tertulis, wawancara, dan presentasi)",
+      ];
+
+  const keterangan = isS1
+    ? [
+        "Program ini terakreditasi oleh BAN-PT",
+        "Perkuliahan dilaksanakan secara tatap muka di kampus",
+        "Bahasa pengantar: Bahasa Indonesia dan Inggris",
+        "Tersedia program beasiswa bagi mahasiswa berprestasi",
+        "Mahasiswa wajib mengikuti program magang/praktik pelayanan",
+        "Gelar yang diperoleh: Sarjana Teologi (S.Th)",
+      ]
+    : [
+        "Program ini terakreditasi oleh BAN-PT",
+        "Perkuliahan dilaksanakan secara tatap muka dan hybrid",
+        "Bahasa pengantar: Bahasa Indonesia dan Inggris",
+        "Tersedia program riset kolaboratif dengan institusi mitra",
+        "Mahasiswa wajib menyusun dan mempertahankan tesis",
+        "Gelar yang diperoleh: Magister Teologi (M.Th)",
+      ];
+
+  const sistemPerkuliahan = isS1
+    ? [
+        "Sistem kredit semester (SKS) dengan beban studi 18–24 SKS per semester",
+        "Perkuliahan reguler: Senin–Jumat, pukul 08.00–16.00 WIB",
+        "Metode pembelajaran: ceramah, diskusi, presentasi, dan studi kasus",
+        "Evaluasi melalui ujian tengah semester, ujian akhir, tugas, dan partisipasi",
+        "Program magang pelayanan di semester 6 dan 7",
+        "Tugas akhir berupa skripsi pada semester 8",
+      ]
+    : [
+        "Sistem kredit semester (SKS) dengan beban studi 9–15 SKS per semester",
+        "Perkuliahan: Senin–Jumat, dengan opsi kelas malam dan akhir pekan",
+        "Metode pembelajaran: seminar, riset mandiri, dan diskusi ilmiah",
+        "Evaluasi melalui paper akademik, presentasi, dan ujian komprehensif",
+        "Kolokium penelitian pada semester 2 dan 3",
+        "Penulisan dan sidang tesis pada semester 4",
+      ];
+
   return (
     <div className="flex flex-col">
       {/* Page Header */}
@@ -235,7 +293,67 @@ export default function ProgramStudiId() {
                 <h2 className="text-2xl font-bold text-sttb-dark-blue mb-6">
                   Persyaratan
                 </h2>
-                <div className="grid grid-cols-1 gap-3">isi syarat</div>
+                <div className="grid grid-cols-1 gap-3">
+                  {persyaratan.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-gray-700 p-3 rounded-lg bg-gray-50"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-sttb-primary-blue flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Jumlah Kredit */}
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-bold text-sttb-dark-blue mb-6">
+                  Jumlah Kredit
+                </h2>
+                <p className="text-gray-700 leading-relaxed text-lg">148 SKS</p>
+              </CardContent>
+            </Card>
+
+            {/* Keterangan */}
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-bold text-sttb-dark-blue mb-6">
+                  Keterangan
+                </h2>
+                <div className="grid grid-cols-1 gap-3">
+                  {keterangan.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-gray-700 p-3 rounded-lg bg-gray-50"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-sttb-primary-blue flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Sistem Perkuliahan */}
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-bold text-sttb-dark-blue mb-6">
+                  Sistem Perkuliahan
+                </h2>
+                <div className="grid grid-cols-1 gap-3">
+                  {sistemPerkuliahan.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 text-gray-700 p-3 rounded-lg bg-gray-50"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-sttb-primary-blue flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </CardContent>
             </Card>
 
