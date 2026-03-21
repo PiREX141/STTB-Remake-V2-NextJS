@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import LecturerCouncilCard from "./LecturerCouncilCard";
 import LecturerCouncilCarousel from "./LecturerCouncilCarousel";
+import { getAllLecturers, Lecturer } from "@/api/LecturerApiServices";
 
 const ketua = [
   {
@@ -97,58 +101,32 @@ const ketuaProgramStudi = [
   },
 ];
 
-const dosen = [
-  {
-    name: "Ferry Herlianto",
-    role: "Ketua Program Studi S.Pd.",
-    image: "/lecturers/lecturer-ferry-herlianto.png",
-    titles: ["M.Th. STA Tiranus", "S.Th. STT Tawangmangu"],
-  },
-  {
-    name: "Dwi Maria Handayani",
-    role: "Ketua Program Studi M.Th.",
-    image: "/lecturers/lecturer-dwi-maria-handayani.png",
-    titles: [
-      "Ph.D. AGST Manila Philippines",
-      "M.Th. International Theological Seminary USA",
-      "M.A. Sekolah Tinggi Teologi Bandung",
-      "S.E. Universitas Katolik Widyakarya Malang",
-    ],
-  },
-  {
-    name: "Sarinah Lo",
-    role: "Ketua Program Studi M.Pd..K",
-    image: "/lecturers/lecturer-sarinah-lo.png",
-    titles: [
-      "Ph.D. TEDS (Trinity Evangelical Divinity School)",
-      "M.Ed. Calvin College USA",
-      "M.A. Singapore Bible College",
-      "S.Si. Universitas Indonesia Jakarta",
-    ],
-  },
-  {
-    name: "Heriyanto",
-    role: "Ketua Program Studi M.Min.",
-    image: "/lecturers/lecturer-heriyanto.png",
-    titles: [
-      "DR. Universitas Pendidikan Indonesia Bandung",
-      "M.Th. International Theological Seminary USA",
-      "S.Th. Sekolah Tinggi Teologi Bandung",
-    ],
-  },
-  {
-    name: "Kristian Kusumawardana",
-    role: "Ketua Program Studi S.Th.",
-    image: "/lecturers/lecturer-kristian-kusumawardana.png",
-    titles: [
-      "M.Th. Sekolah Tinggi Teologi Bandung",
-      "M.Div. Sekolah Tinggi Teologi SAAT Malang ",
-      "S.Si. MIPA UNS Surakarta",
-    ],
-  },
-];
-
 const LecturerCouncilSection = () => {
+  const [dosenFromDb, setDosenFromDb] = useState<
+    { name: string; role: string; image: string; titles: string[] }[]
+  >([]);
+
+  useEffect(() => {
+    const fetchLecturers = async () => {
+      try {
+        const data: Lecturer[] = await getAllLecturers();
+        const mapped = data.map((lecturer) => ({
+          name: lecturer.nama_Lengkap,
+          role: lecturer.bidang_Keahlian,
+          image: "/lecturers/default-lecturer.png",
+          titles: lecturer.pendidikan_Terakhir
+            ? [lecturer.pendidikan_Terakhir]
+            : [],
+        }));
+        setDosenFromDb(mapped);
+      } catch (error) {
+        console.error("Failed to fetch lecturers:", error);
+      }
+    };
+
+    fetchLecturers();
+  }, []);
+
   return (
     <div className="flex flex-col">
       <section className="bg-sttb-dark-blue text-white py-16">
@@ -227,8 +205,11 @@ const LecturerCouncilSection = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-sttb-dark-blue mb-4 pb-2">
                 Jajaran Dosen
               </h2>
-              {/* placeholder dlu pke ketua progra studi */}
-              <LecturerCouncilCarousel lecturers={dosen} />
+              {dosenFromDb.length > 0 ? (
+                <LecturerCouncilCarousel lecturers={dosenFromDb} />
+              ) : (
+                <p className="text-gray-500">Loading lecturers...</p>
+              )}
             </div>
           </div>
         </div>
@@ -238,3 +219,4 @@ const LecturerCouncilSection = () => {
 };
 
 export default LecturerCouncilSection;
+
