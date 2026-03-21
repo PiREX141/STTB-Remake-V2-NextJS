@@ -143,6 +143,7 @@ function mapMajorToProgram(major: Major) {
   const isS1 = major.tingkat === "S1";
 
   return {
+    id: major.id,
     icon: isS1 ? BookOpen : GraduationCap,
     title: major.nama_Prodi,
     duration: isS1 ? "4 years (8 semesters)" : "2 years (4 semesters)",
@@ -174,6 +175,7 @@ function mapMajorToProgram(major: Major) {
 }
 
 interface ProgramData {
+  id: number;
   icon: LucideIcon;
   title: string;
   duration: string;
