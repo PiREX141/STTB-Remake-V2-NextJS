@@ -1,7 +1,9 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import ScholarshipCard from "@/components/layouts/finances/ScholarshipCard";
 import FaqList from "@/components/layouts/admissions/FaqList";
+import { getAllDocuments, Document } from "@/api/DocumentApiServices";
 
 const scholarships = [
   {
@@ -71,6 +73,17 @@ const faq = {
 };
 
 export default function Scholarships() {
+  const [documents, setDocuments] = useState<Document[]>([]);
+
+  useEffect(() => {
+    getAllDocuments()
+      .then((data) => setDocuments(data))
+      .catch((err) => console.error("Failed to fetch documents:", err));
+  }, []);
+
+  const s1Doc = documents.find((doc) => doc.id === 1);
+  const s2Doc = documents.find((doc) => doc.id === 2);
+
   return (
     <div className="flex flex-col">
       <section className="bg-sttb-dark-blue text-white py-16">
@@ -254,13 +267,17 @@ export default function Scholarships() {
                 </div>
                 <div className="flex flex-col gap-3">
                   <a
-                    href="/scholarship-form/Form-Aplikasi-Beasiswa-Baru-S1.pdf"
+                    href={s1Doc?.link_File ?? "/scholarship-form/Form-Aplikasi-Beasiswa-Baru-S1.pdf"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-red-600 hover:bg-red-700 text-white text-center font-semibold py-3 px-8 rounded transition-colors"
                   >
                     UNDUH FORMULIR S1
                   </a>
                   <a
-                    href="/scholarship-form/Form-Aplikasi-Beasiswa-Baru-S1.pdf"
+                    href={s2Doc?.link_File ?? "/scholarship-form/Form-Aplikasi-Beasiswa-Baru-S1.pdf"}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-red-600 hover:bg-red-700 text-white text-center font-semibold py-3 px-8 rounded transition-colors"
                   >
                     UNDUH FORMULIR S2
