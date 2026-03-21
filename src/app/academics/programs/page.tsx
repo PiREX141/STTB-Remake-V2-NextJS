@@ -1,141 +1,201 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import ProgramCard from "@/components/layouts/academics/ProgramCard";
-import { BookOpen, GraduationCap, Users } from "lucide-react";
+import { BookOpen, GraduationCap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getAllMajors, Major } from "@/api/MajorApiServices";
+import { LucideIcon } from "lucide-react";
+
+// const programs = [
+//   {
+//     icon: BookOpen,
+//     title: "Sarjana Teologi",
+//     duration: "4 years (8 semesters)",
+//     description:
+//       "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
+//     courses: [
+//       "Old Testament Studies",
+//       "New Testament Studies",
+//       "Systematic Theology",
+//       "Church History",
+//       "Homiletics & Preaching",
+//       "Christian Education",
+//       "Pastoral Counseling",
+//       "Mission & Evangelism",
+//     ],
+//   },
+//   {
+//     icon: BookOpen,
+//     title: "Sarjana Pendidikan Kristen",
+//     duration: "4 years (8 semesters)",
+//     description:
+//       "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
+//     courses: [
+//       "Old Testament Studies",
+//       "New Testament Studies",
+//       "Systematic Theology",
+//       "Church History",
+//       "Homiletics & Preaching",
+//       "Christian Education",
+//       "Pastoral Counseling",
+//       "Mission & Evangelism",
+//     ],
+//   },
+//   {
+//     icon: BookOpen,
+//     title: "Magister Teologi Pelayanan Pastoral Gereja Urban",
+//     duration: "4 years (8 semesters)",
+//     description:
+//       "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
+//     courses: [
+//       "Old Testament Studies",
+//       "New Testament Studies",
+//       "Systematic Theology",
+//       "Church History",
+//       "Homiletics & Preaching",
+//       "Christian Education",
+//       "Pastoral Counseling",
+//       "Mission & Evangelism",
+//     ],
+//   },
+//   {
+//     icon: GraduationCap,
+//     title: "Magister Teologi Transformasi Budaya & Masyarakat",
+//     duration: "3 years (6 semesters)",
+//     description:
+//       "An advanced professional degree preparing students for pastoral ministry, theological leadership, and specialized Christian service through intensive biblical and theological study.",
+//     courses: [
+//       "Advanced Biblical Exegesis",
+//       "Theological Research Methods",
+//       "Contemporary Theology",
+//       "Leadership & Administration",
+//       "Spiritual Formation",
+//       "Cross-Cultural Ministry",
+//       "Ethics & Social Issues",
+//       "Ministry Practicum",
+//     ],
+//   },
+//   {
+//     icon: Users,
+//     title: "Magister Pendidikan Kristen",
+//     duration: "2 years (4 semesters)",
+//     description:
+//       "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
+//     courses: [
+//       "Research Methodology",
+//       "Advanced Hermeneutics",
+//       "Theological Analysis",
+//       "Dissertation Seminar",
+//       "Academic Writing",
+//       "Specialized Electives",
+//     ],
+//   },
+//   {
+//     icon: Users,
+//     title: "Magister Ministri Marketplace",
+//     duration: "2 years (4 semesters)",
+//     description:
+//       "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
+//     courses: [
+//       "Research Methodology",
+//       "Advanced Hermeneutics",
+//       "Theological Analysis",
+//       "Dissertation Seminar",
+//       "Academic Writing",
+//       "Specialized Electives",
+//     ],
+//   },
+//   {
+//     icon: Users,
+//     title: "Magister Ministri Kepemimpinan Pastoral",
+//     duration: "2 years (4 semesters)",
+//     description:
+//       "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
+//     courses: [
+//       "Research Methodology",
+//       "Advanced Hermeneutics",
+//       "Theological Analysis",
+//       "Dissertation Seminar",
+//       "Academic Writing",
+//       "Specialized Electives",
+//     ],
+//   },
+//   {
+//     icon: Users,
+//     title: "Magister Ministri Teologi Pelayanan Gerejawi",
+//     duration: "2 years (4 semesters)",
+//     description:
+//       "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
+//     courses: [
+//       "Research Methodology",
+//       "Advanced Hermeneutics",
+//       "Theological Analysis",
+//       "Dissertation Seminar",
+//       "Academic Writing",
+//       "Specialized Electives",
+//     ],
+//   },
+// ];
+
+function mapMajorToProgram(major: Major) {
+  const isS1 = major.tingkat === "S1";
+
+  return {
+    icon: isS1 ? BookOpen : GraduationCap,
+    title: major.nama_Prodi,
+    duration: isS1 ? "4 years (8 semesters)" : "2 years (4 semesters)",
+    description: isS1
+      ? "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry."
+      : "An advanced graduate program preparing students for theological leadership and specialized Christian service through intensive biblical and theological study.",
+    courses: isS1
+      ? [
+          "Old Testament Studies",
+          "New Testament Studies",
+          "Systematic Theology",
+          "Church History",
+          "Homiletics & Preaching",
+          "Christian Education",
+          "Pastoral Counseling",
+          "Mission & Evangelism",
+        ]
+      : [
+          "Advanced Biblical Exegesis",
+          "Theological Research Methods",
+          "Contemporary Theology",
+          "Leadership & Administration",
+          "Spiritual Formation",
+          "Cross-Cultural Ministry",
+          "Ethics & Social Issues",
+          "Ministry Practicum",
+        ],
+  };
+}
+
+interface ProgramData {
+  icon: LucideIcon;
+  title: string;
+  duration: string;
+  description: string;
+  courses: string[];
+}
 
 export default function AcademicsPrograms() {
-  const programs = [
-    {
-      icon: BookOpen,
-      title: "Sarjana Teologi",
-      duration: "4 years (8 semesters)",
-      description:
-        "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
-      courses: [
-        "Old Testament Studies",
-        "New Testament Studies",
-        "Systematic Theology",
-        "Church History",
-        "Homiletics & Preaching",
-        "Christian Education",
-        "Pastoral Counseling",
-        "Mission & Evangelism",
-      ],
-    },
-    {
-      icon: BookOpen,
-      title: "Sarjana Pendidikan Kristen",
-      duration: "4 years (8 semesters)",
-      description:
-        "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
-      courses: [
-        "Old Testament Studies",
-        "New Testament Studies",
-        "Systematic Theology",
-        "Church History",
-        "Homiletics & Preaching",
-        "Christian Education",
-        "Pastoral Counseling",
-        "Mission & Evangelism",
-      ],
-    },
-    {
-      icon: BookOpen,
-      title: "Magister Teologi Pelayanan Pastoral Gereja Urban",
-      duration: "4 years (8 semesters)",
-      description:
-        "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry.",
-      courses: [
-        "Old Testament Studies",
-        "New Testament Studies",
-        "Systematic Theology",
-        "Church History",
-        "Homiletics & Preaching",
-        "Christian Education",
-        "Pastoral Counseling",
-        "Mission & Evangelism",
-      ],
-    },
-    {
-      icon: GraduationCap,
-      title: "Magister Teologi Transformasi Budaya & Masyarakat",
-      duration: "3 years (6 semesters)",
-      description:
-        "An advanced professional degree preparing students for pastoral ministry, theological leadership, and specialized Christian service through intensive biblical and theological study.",
-      courses: [
-        "Advanced Biblical Exegesis",
-        "Theological Research Methods",
-        "Contemporary Theology",
-        "Leadership & Administration",
-        "Spiritual Formation",
-        "Cross-Cultural Ministry",
-        "Ethics & Social Issues",
-        "Ministry Practicum",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Magister Pendidikan Kristen",
-      duration: "2 years (4 semesters)",
-      description:
-        "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
-      courses: [
-        "Research Methodology",
-        "Advanced Hermeneutics",
-        "Theological Analysis",
-        "Dissertation Seminar",
-        "Academic Writing",
-        "Specialized Electives",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Magister Ministri Marketplace",
-      duration: "2 years (4 semesters)",
-      description:
-        "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
-      courses: [
-        "Research Methodology",
-        "Advanced Hermeneutics",
-        "Theological Analysis",
-        "Dissertation Seminar",
-        "Academic Writing",
-        "Specialized Electives",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Magister Ministri Kepemimpinan Pastoral",
-      duration: "2 years (4 semesters)",
-      description:
-        "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
-      courses: [
-        "Research Methodology",
-        "Advanced Hermeneutics",
-        "Theological Analysis",
-        "Dissertation Seminar",
-        "Academic Writing",
-        "Specialized Electives",
-      ],
-    },
-    {
-      icon: Users,
-      title: "Magister Ministri Teologi Pelayanan Gerejawi",
-      duration: "2 years (4 semesters)",
-      description:
-        "A research-focused graduate program for in-depth theological study and scholarship, preparing students for academic teaching or advanced ministry positions.",
-      courses: [
-        "Research Methodology",
-        "Advanced Hermeneutics",
-        "Theological Analysis",
-        "Dissertation Seminar",
-        "Academic Writing",
-        "Specialized Electives",
-      ],
-    },
-  ];
+  const [programs, setPrograms] = useState<ProgramData[]>([]);
+
+  useEffect(() => {
+    const fetchPrograms = async () => {
+      try {
+        const majors = await getAllMajors();
+        setPrograms(majors.map(mapMajorToProgram));
+      } catch (error) {
+        console.error("Failed to fetch programs:", error);
+      }
+    };
+
+    fetchPrograms();
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -174,3 +234,4 @@ export default function AcademicsPrograms() {
     </div>
   );
 }
+
