@@ -15,27 +15,72 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { getAllMajors, type Major } from "@/api/MajorApiServices";
+import { getAllLessonSubjects } from "@/api/LessonSubjectApiServices";
 
 export default function ProgramStudiId() {
   const params = useParams();
   const programId = Number(params.id);
 
   const [major, setMajor] = useState<Major | null>(null);
+  const [courses, setCourses] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const dummyCourses = (tingkat: string) =>
+    tingkat === "S1"
+      ? [
+          "Old Testament Studies",
+          "New Testament Studies",
+          "Systematic Theology",
+          "Church History",
+          "Homiletics & Preaching",
+          "Christian Education",
+          "Pastoral Counseling",
+          "Mission & Evangelism",
+        ]
+      : [
+          "Advanced Biblical Exegesis",
+          "Theological Research Methods",
+          "Contemporary Theology",
+          "Leadership & Administration",
+          "Spiritual Formation",
+          "Cross-Cultural Ministry",
+          "Ethics & Social Issues",
+          "Ministry Practicum",
+        ];
+
   useEffect(() => {
-    getAllMajors()
-      .then((data) => {
-        const found = data.find((m) => m.id === programId);
-        if (found) {
-          setMajor(found);
-        } else {
+    async function fetchData() {
+      try {
+        const majors = await getAllMajors();
+        const found = majors.find((m) => m.id === programId);
+        if (!found) {
           setError("Program not found");
+          return;
         }
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
+        setMajor(found);
+
+        const allCourses = await getAllLessonSubjects();
+        const programCourses = allCourses
+          .filter((c) => c.prodi_Id === programId)
+          .map((c) => c.nama_Mk);
+
+        setCourses(
+          programCourses.length > 0
+            ? programCourses
+            : dummyCourses(found.tingkat),
+        );
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unexpected error occurred");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchData();
   }, [programId]);
 
   if (loading) {
@@ -92,27 +137,6 @@ export default function ProgramStudiId() {
   const description = isS1
     ? "A comprehensive undergraduate program designed to provide students with a solid foundation in biblical studies, systematic theology, church history, and practical ministry. Students will develop critical thinking skills, theological literacy, and practical competencies needed for effective ministry in diverse contexts."
     : "An advanced graduate program preparing students for theological leadership and specialized Christian service through intensive biblical and theological study. This program equips graduates with advanced research skills, deeper theological understanding, and specialized expertise for academic and ministry leadership roles.";
-  const courses = isS1
-    ? [
-        "Old Testament Studies",
-        "New Testament Studies",
-        "Systematic Theology",
-        "Church History",
-        "Homiletics & Preaching",
-        "Christian Education",
-        "Pastoral Counseling",
-        "Mission & Evangelism",
-      ]
-    : [
-        "Advanced Biblical Exegesis",
-        "Theological Research Methods",
-        "Contemporary Theology",
-        "Leadership & Administration",
-        "Spiritual Formation",
-        "Cross-Cultural Ministry",
-        "Ethics & Social Issues",
-        "Ministry Practicum",
-      ];
 
   return (
     <div className="flex flex-col">
@@ -202,6 +226,16 @@ export default function ProgramStudiId() {
                 <p className="text-gray-700 leading-relaxed text-lg">
                   {description}
                 </p>
+              </CardContent>
+            </Card>
+
+            {/* Persyaratan */}
+            <Card className="mb-8">
+              <CardContent className="p-8">
+                <h2 className="text-2xl font-bold text-sttb-dark-blue mb-6">
+                  Persyaratan
+                </h2>
+                <div className="grid grid-cols-1 gap-3">isi syarat</div>
               </CardContent>
             </Card>
 
