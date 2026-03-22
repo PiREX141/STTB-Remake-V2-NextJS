@@ -248,6 +248,11 @@ export default function Home() {
               })}
             </div>
           )}
+          <div className="mt-10 text-center">
+            <Button asChild variant="outline" className="cursor-pointer">
+              <Link href="/academics/programs">View All Academic Programs</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -421,6 +426,11 @@ export default function Home() {
               })}
             </div>
           )}
+          <div className="mt-10 text-center">
+            <Button asChild variant="outline" className="cursor-pointer">
+              <Link href="/news-events">View All Events</Link>
+            </Button>
+          </div>
         </div>
       </section>
 
