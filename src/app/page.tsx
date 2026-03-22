@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,11 +17,90 @@ import {
   GraduationCap,
   Church,
   Calendar,
+  MapPin,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { motion } from "motion/react";
+import { getAllMajors, type Major } from "@/api/MajorApiServices";
+import { getAllNews, type News } from "@/api/NewsApiServices";
+import { getAllEvents, type Event } from "@/api/EventApiServices";
 
 export default function Home() {
+  const [majors, setMajors] = useState<Major[]>([]);
+  const [news, setNews] = useState<News[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [majorsLoading, setMajorsLoading] = useState(true);
+  const [newsLoading, setNewsLoading] = useState(true);
+  const [eventsLoading, setEventsLoading] = useState(true);
+  const [majorsError, setMajorsError] = useState<string | null>(null);
+  const [newsError, setNewsError] = useState<string | null>(null);
+  const [eventsError, setEventsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    getAllMajors()
+      .then((data) => setMajors(data.slice(0, 3)))
+      .catch((err) => setMajorsError(err.message))
+      .finally(() => setMajorsLoading(false));
+
+    getAllNews()
+      .then((data) => {
+        const sorted = [...data].sort(
+          (a, b) =>
+            new Date(b.tanggal_Publikasi).getTime() -
+            new Date(a.tanggal_Publikasi).getTime()
+        );
+        setNews(sorted.slice(0, 3));
+      })
+      .catch((err) => setNewsError(err.message))
+      .finally(() => setNewsLoading(false));
+
+    getAllEvents()
+      .then((data) => setEvents(data.slice(0, 4)))
+      .catch((err) => setEventsError(err.message))
+      .finally(() => setEventsLoading(false));
+  }, []);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  const formatEventDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const month = date
+      .toLocaleDateString("en-US", { month: "short" })
+      .toUpperCase();
+    const day = date.getDate().toString();
+    return { month, day };
+  };
+
+  const formatEventTime = (startDate: string, endDate: string) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const timeFormat: Intl.DateTimeFormatOptions = {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    };
+
+    if (start.toDateString() === end.toDateString()) {
+      return `${start.toLocaleTimeString("en-US", timeFormat)} - ${end.toLocaleTimeString("en-US", timeFormat)}`;
+    }
+
+    return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+  };
+
+  const truncateText = (text: string, maxLength: number = 150) => {
+    const plainText = text.replace(/<[^>]*>/g, "");
+    if (plainText.length <= maxLength) return plainText;
+    return plainText.substring(0, maxLength).trim() + "...";
+  };
+
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
@@ -107,61 +187,67 @@ export default function Home() {
               Discover our comprehensive theological education offerings
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: BookOpen,
-                title: "Bachelor of Theology",
-                description:
-                  "Comprehensive undergraduate program in biblical studies, systematic theology, and practical ministry.",
-                link: "/academics/programs",
-              },
-              {
-                icon: GraduationCap,
-                title: "Master of Divinity",
-                description:
-                  "Advanced professional degree preparing students for pastoral ministry and theological leadership.",
-                link: "/academics/programs",
-              },
-              {
-                icon: Users,
-                title: "Master of Theology",
-                description:
-                  "Research-focused graduate program for in-depth theological study and scholarship.",
-                link: "/academics/programs",
-              },
-            ].map((program, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardHeader>
-                    <div className="w-12 h-12 bg-sttb-primary-blue rounded-lg flex items-center justify-center mb-4">
-                      <program.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <CardTitle className="text-sttb-dark-blue">
-                      {program.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base mb-4">
-                      {program.description}
-                    </CardDescription>
-                    <Link
-                      href={program.link}
-                      className="text-sttb-primary-blue hover:text-sttb-dark-blue font-medium inline-flex items-center"
-                    >
-                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+
+          {majorsLoading && (
+            <div className="flex justify-center items-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-sttb-primary-blue" />
+              <span className="ml-3 text-gray-600">Loading programs...</span>
+            </div>
+          )}
+
+          {majorsError && (
+            <div className="text-center py-16">
+              <p className="text-red-500 mb-2">Failed to load programs</p>
+              <p className="text-gray-500 text-sm">{majorsError}</p>
+            </div>
+          )}
+
+          {!majorsLoading && !majorsError && majors.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-gray-500">No programs available at this time.</p>
+            </div>
+          )}
+
+          {!majorsLoading && !majorsError && majors.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {majors.map((major, index) => {
+                const Icon = major.tingkat === "S1" ? BookOpen : GraduationCap;
+                return (
+                  <motion.div
+                    key={major.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Card className="h-full hover:shadow-lg transition-shadow">
+                      <CardHeader>
+                        <div className="w-12 h-12 bg-sttb-primary-blue rounded-lg flex items-center justify-center mb-4">
+                          <Icon className="h-6 w-6 text-white" />
+                        </div>
+                        <CardTitle className="text-sttb-dark-blue">
+                          {major.nama_Prodi}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-base mb-4">
+                          {major.tingkat === "S1"
+                            ? "Comprehensive undergraduate program in biblical studies, systematic theology, and practical ministry."
+                            : "Advanced graduate program preparing students for theological leadership and specialized Christian service."}
+                        </CardDescription>
+                        <Link
+                          href={`/academics/programs/${major.id}`}
+                          className="text-sttb-primary-blue hover:text-sttb-dark-blue font-medium inline-flex items-center"
+                        >
+                          Learn More <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 
@@ -174,7 +260,7 @@ export default function Home() {
                 Latest News
               </h2>
               <p className="text-lg text-gray-600">
-                Stay updated with what's happening at STTB
+                Stay updated with what&apos;s happening at STTB
               </p>
             </div>
             <Button
@@ -185,65 +271,66 @@ export default function Home() {
               <Link href="/news-events">View All News</Link>
             </Button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                image:
-                  "https://images.unsplash.com/photo-1745162829464-c3487261f90d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx1bml2ZXJzaXR5JTIwc3R1ZGVudHMlMjBzdHVkeWluZyUyMHRoZW9sb2d5fGVufDF8fHx8MTc3MzExODA3MXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "New Academic Year 2026 Begins",
-                date: "March 5, 2026",
-                excerpt:
-                  "STTB welcomes 120 new students across all programs as we begin the 2026 academic year with renewed vision and commitment.",
-              },
-              {
-                image:
-                  "https://images.unsplash.com/photo-1591218214141-45545921d2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFkdWF0aW9uJTIwY2VyZW1vbnklMjBzdHVkZW50cyUyMGNlbGVicmF0aW5nfGVufDF8fHx8MTc3MzExNTIzOXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "Graduation Ceremony 2025 Highlights",
-                date: "February 28, 2026",
-                excerpt:
-                  "Celebrating the achievements of 85 graduates who are now equipped to serve in various ministry contexts.",
-              },
-              {
-                image:
-                  "https://images.unsplash.com/photo-1760840414854-36cd365d14f1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhY2FkZW1pYyUyMGxpYnJhcnklMjBib29rcyUyMHJlYWRpbmd8ZW58MXx8fHwxNzczMTE4MDcxfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-                title: "Library Expansion Completed",
-                date: "February 15, 2026",
-                excerpt:
-                  "Our newly renovated library now features 10,000 additional theological resources and modern study spaces.",
-              },
-            ].map((news, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-                  <div className="aspect-video relative overflow-hidden">
-                    <ImageWithFallback
-                      src={news.image}
-                      alt={news.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                  <CardHeader>
-                    <div className="text-sm text-sttb-primary-blue mb-2">
-                      {news.date}
-                    </div>
-                    <CardTitle className="text-xl text-sttb-dark-blue">
-                      {news.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-base">
-                      {news.excerpt}
-                    </CardDescription>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+
+          {newsLoading && (
+            <div className="flex justify-center items-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-sttb-primary-blue" />
+              <span className="ml-3 text-gray-600">Loading news...</span>
+            </div>
+          )}
+
+          {newsError && (
+            <div className="text-center py-16">
+              <p className="text-red-500 mb-2">Failed to load news</p>
+              <p className="text-gray-500 text-sm">{newsError}</p>
+            </div>
+          )}
+
+          {!newsLoading && !newsError && news.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-gray-500">No news articles available at this time.</p>
+            </div>
+          )}
+
+          {!newsLoading && !newsError && news.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {news.map((article, index) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Link href={`/news-events/news/${article.slug}`} className="group">
+                    <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
+                      <div className="aspect-video relative overflow-hidden">
+                        <ImageWithFallback
+                          src={article.thumbnail_Url}
+                          alt={article.judul}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <CardHeader>
+                        <div className="text-sm text-sttb-primary-blue mb-2">
+                          {formatDate(article.tanggal_Publikasi)}
+                        </div>
+                        <CardTitle className="text-xl text-sttb-dark-blue">
+                          {article.judul}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <CardDescription className="text-base">
+                          {truncateText(article.konten)}
+                        </CardDescription>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
           <div className="mt-8 text-center md:hidden">
             <Button asChild variant="outline" className="cursor-pointer">
               <Link href="/news-events">View All News</Link>
@@ -263,72 +350,77 @@ export default function Home() {
               Join us for these upcoming events and activities
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                date: "MAR 15",
-                title: "Open House for Prospective Students",
-                time: "9:00 AM - 3:00 PM",
-                location: "Main Campus",
-              },
-              {
-                date: "MAR 22",
-                title: "Guest Lecture: Contemporary Theological Issues",
-                time: "2:00 PM - 4:00 PM",
-                location: "Auditorium",
-              },
-              {
-                date: "MAR 29",
-                title: "Spring Spiritual Emphasis Week",
-                time: "All Week",
-                location: "Chapel",
-              },
-              {
-                date: "APR 5",
-                title: "Ministry Internship Fair",
-                time: "10:00 AM - 2:00 PM",
-                location: "Student Center",
-              },
-            ].map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <Card className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex gap-4">
-                      <div className="shrink-0 w-16 h-16 bg-sttb-accent-red rounded-lg flex flex-col items-center justify-center text-white">
-                        <div className="text-xs font-semibold">
-                          {event.date.split(" ")[0]}
-                        </div>
-                        <div className="text-2xl font-bold">
-                          {event.date.split(" ")[1]}
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg text-sttb-dark-blue mb-2">
-                          {event.title}
-                        </h3>
-                        <div className="flex flex-col gap-1 text-sm text-gray-600">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4 text-sttb-primary-blue" />
-                            <span>{event.time}</span>
+
+          {eventsLoading && (
+            <div className="flex justify-center items-center py-16">
+              <Loader2 className="h-8 w-8 animate-spin text-sttb-primary-blue" />
+              <span className="ml-3 text-gray-600">Loading events...</span>
+            </div>
+          )}
+
+          {eventsError && (
+            <div className="text-center py-16">
+              <p className="text-red-500 mb-2">Failed to load events</p>
+              <p className="text-gray-500 text-sm">{eventsError}</p>
+            </div>
+          )}
+
+          {!eventsLoading && !eventsError && events.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-gray-500">No upcoming events at this time.</p>
+            </div>
+          )}
+
+          {!eventsLoading && !eventsError && events.length > 0 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {events.map((event, index) => {
+                const { month, day } = formatEventDate(event.tanggal_Mulai);
+                return (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <Link href={`/news-events/events/${event.id}`} className="group">
+                      <Card className="hover:shadow-lg transition-shadow">
+                        <CardContent className="p-6">
+                          <div className="flex gap-4">
+                            <div className="shrink-0 w-16 h-16 bg-sttb-accent-red rounded-lg flex flex-col items-center justify-center text-white">
+                              <div className="text-xs font-semibold">
+                                {month}
+                              </div>
+                              <div className="text-2xl font-bold">
+                                {day}
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <h3 className="font-semibold text-lg text-sttb-dark-blue mb-2 group-hover:text-sttb-primary-blue transition-colors">
+                                {event.nama_Kegiatan}
+                              </h3>
+                              <div className="flex flex-col gap-1 text-sm text-gray-600">
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="h-4 w-4 text-sttb-primary-blue" />
+                                  <span>{formatEventTime(event.tanggal_Mulai, event.tanggal_Selesai)}</span>
+                                </div>
+                                {event.lokasi && (
+                                  <div className="flex items-center gap-2">
+                                    <MapPin className="h-4 w-4 text-sttb-primary-blue" />
+                                    <span>{event.lokasi}</span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex items-center gap-2">
-                            <Church className="h-4 w-4 text-sttb-primary-blue" />
-                            <span>{event.location}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 
