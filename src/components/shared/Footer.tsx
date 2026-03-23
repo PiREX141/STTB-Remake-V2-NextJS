@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Facebook,
+  Instagram,
+  Youtube,
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,16 +17,26 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">About STTB</h3>
             <p className="text-sm text-gray-300 mb-4">
-              Sekolah Tinggi Teologi Bandung is a leading theological seminary dedicated to training leaders for Christian ministry and service.
+              Sekolah Tinggi Teologi Bandung is a leading theological seminary
+              dedicated to training leaders for Christian ministry and service.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="hover:text-sttb-secondary-blue transition-colors">
+              <a
+                href="#"
+                className="hover:text-sttb-secondary-blue transition-colors"
+              >
                 <Facebook className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-sttb-secondary-blue transition-colors">
+              <a
+                href="#"
+                className="hover:text-sttb-secondary-blue transition-colors"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-sttb-secondary-blue transition-colors">
+              <a
+                href="#"
+                className="hover:text-sttb-secondary-blue transition-colors"
+              >
                 <Youtube className="h-5 w-5" />
               </a>
             </div>
@@ -30,28 +47,35 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/about" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/academics/programs" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link
+                  href="/academics/programs"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
                   Academic Programs
                 </Link>
               </li>
               <li>
-                <Link href="https://sis.sttb.ac.id/pmb" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link
+                  href="https://sis.sttb.ac.id/pmb"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
                   Apply Now
                 </Link>
               </li>
               <li>
-                <Link href="/news-events" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link
+                  href="/news-events"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
                   News & Events
-                </Link>
-              </li>
-              <li>
-                <Link href="/resources" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
-                  Resources
                 </Link>
               </li>
             </ul>
@@ -59,26 +83,40 @@ export default function Footer() {
 
           {/* Academics */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Academics</h3>
+            <h3 className="text-lg font-semibold mb-4">
+              Academics & Admissions
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/academics/programs" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
+                <Link
+                  href="/academics/programs"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
                   Programs & Degrees
                 </Link>
               </li>
               <li>
-                <Link href="/academics/faculty" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
-                  Faculty
+                <Link
+                  href="/admissions/schedule"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
+                  Registration Schedule
                 </Link>
               </li>
               <li>
-                <Link href="/academics/curriculum" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
-                  Curriculum
+                <Link
+                  href="/admissions/procedure"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
+                  Registration Procedure
                 </Link>
               </li>
               <li>
-                <Link href="/academics/calendar" className="text-gray-300 hover:text-sttb-secondary-blue transition-colors">
-                  Academic Calendar
+                <Link
+                  href="/admissions/faq"
+                  className="text-gray-300 hover:text-sttb-secondary-blue transition-colors"
+                >
+                  FaQs
                 </Link>
               </li>
             </ul>
@@ -91,8 +129,10 @@ export default function Footer() {
               <li className="flex items-start space-x-2">
                 <MapPin className="h-5 w-5 text-sttb-secondary-blue flex-shrink-0 mt-0.5" />
                 <span className="text-gray-300">
-                  Jl. Durian No. 38<br />
-                  Bandung 40264<br />
+                  Jl. Durian No. 38
+                  <br />
+                  Bandung 40264
+                  <br />
                   West Java, Indonesia
                 </span>
               </li>
@@ -109,7 +149,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-sttb-primary-blue mt-8 pt-8 text-center text-sm text-gray-300">
-          <p>&copy; {new Date().getFullYear()} Sekolah Tinggi Teologi Bandung. All rights reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Sekolah Tinggi Teologi Bandung.
+            All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

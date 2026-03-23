@@ -341,7 +341,7 @@ export default function Navbar() {
         </nav>
 
         {/* Mobile Menu */}
-        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+        {/* <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="lg:hidden">
             <Button
               variant="ghost"
@@ -496,7 +496,7 @@ export default function Navbar() {
               </Button>
             </nav>
           </SheetContent>
-        </Sheet>
+        </Sheet> */}
       </div>
     </header>
   );
